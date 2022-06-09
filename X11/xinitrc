@@ -1,0 +1,17 @@
+#!/bin/sh
+
+WALL_DIR=~/.walls
+DWM_DIR=~/.sources
+
+xcompmgr &
+xrdb ~/.Xresources &
+
+exec slstatus & 
+exec dwm &
+
+xbindkeys
+WALL="$WALL_DIR/wall$((RANDOM%$(ls $WALL_DIR | wc -l))).png"
+xwallpaper --zoom "$WALL" && wal -i "$WALL"
+xautolock -time 3 -locker slock
+
+xrandr -s 1920x1080
